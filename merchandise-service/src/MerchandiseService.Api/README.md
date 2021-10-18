@@ -1,0 +1,3 @@
+## MerchandiseServiceApi
+Хост сервиса
+
