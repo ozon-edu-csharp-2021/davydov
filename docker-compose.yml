@@ -1,0 +1,29 @@
+version: '3.8'
+
+networks:
+  backend:
+    driver: bridge
+
+services:
+  merchandise-service:
+    build:
+      context: ./merchandise-service
+      dockerfile: Dockerfile
+    image: merchandise-service-img
+    container_name: merchandise-service-cnt
+    ports:
+      - 5000:5000
+    networks:
+      - backend
+    
+  supply-service:
+    image: ghcr.io/ozon-edu-csharp-2021/supply-service:main
+    
+  emailing-service:
+    image: ghcr.io/ozon-edu-csharp-2021/emailing-service:main
+    
+  employees-service:
+    image: ghcr.io/ozon-edu-csharp-2021/employees-service:main
+    
+  stock-api:
+    image: ghcr.io/ozon-edu-csharp-2021/stock-api:main
