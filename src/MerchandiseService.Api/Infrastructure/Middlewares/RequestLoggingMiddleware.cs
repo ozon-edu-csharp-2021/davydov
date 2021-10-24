@@ -38,7 +38,6 @@ namespace MerchandiseService.Api.Infrastructure.Middlewares
             {
                 _logger.LogInformation("----> HTTP request");
                 _logger.LogInformation(context.Request.Path);
-                _logger.LogInformation(context.Request.Protocol);
                 var headersAsStrings = context.Request.Headers
                     .Select(x => $"{x.Key}: {x.Value}");
                 _logger.LogInformation(string.Join(Environment.NewLine, headersAsStrings));

@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 namespace MerchandiseService.Api.Infrastructure.Interceptors
 {
     /// <summary>
-    ///     Интерцептор для логирония unary запросов и ответов
+    ///     Интерцептор для логирования unary запросов и ответов
     /// </summary>
     public class LoggingInterceptor : Interceptor
     {
