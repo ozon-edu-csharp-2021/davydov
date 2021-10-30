@@ -1,3 +1,4 @@
-## MerchandiseServiceApi
+## MerchandiseService.Api
+___
 Хост сервиса
 

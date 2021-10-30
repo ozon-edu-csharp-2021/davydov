@@ -1,9 +1,10 @@
+using MerchandiseService.Api.GrpcServices;
+using MerchandiseService.Api.Services;
+using MerchandiseService.Api.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 
 namespace MerchandiseService.Api
 {
@@ -27,11 +28,7 @@ namespace MerchandiseService.Api
         /// </summary>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "MerchandiseService.Api", Version = "v1"});
-            });
+            services.AddSingleton<IMerchService, MerchService>();
         }
 
         /// <summary>
@@ -39,17 +36,13 @@ namespace MerchandiseService.Api
         /// </summary>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MerchandiseService.Api v1"));
-            }
-
             app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseAuthorization();
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapGrpcService<MerchGrpcService>();
+                endpoints.MapControllers();
+            });
         }
     }
 }
